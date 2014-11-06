@@ -1,0 +1,66 @@
+<%= erb :'partials/_navbar' %>
+
+<div class="container">
+	<form action="/surveys" method="post" enctype="multipart/form-data">
+		<div id="title">
+			<div class="input-group" style="width:100%">
+			  <span class="input-group-addon">Title</span>
+			  <input type="text" name="title" class="form-control" placeholder="">
+			</div>
+			<div class="row">
+				<div class="col-lg-6" style="height:30px">
+					<span class="btn btn-warning btn-file"> Upload files 
+						<input type="file" name="image">
+					</span>
+				</div>
+				<div class="col-lg-5">
+					<button id="add-question" class="btn btn-warning pull-right">Add Question</button>
+				</div>
+				<div class="col-lg-1">
+				</div>
+			</div>
+			<br>
+		</div>
+		<div id="questions">
+		</div>
+		<div class="row">
+			<input type="submit" value="Submit">
+		</div>
+	</form>
+</div>
+
+
+<script>
+$(document).ready(function() {
+	var question_counter = 0
+	var answer_counter = 0
+
+	function getDivWithOrderedName() {
+		question_counter += 1
+		return ('<div class= question name="' + question_counter + '"><div class="input-group" ><span class="input-group-addon">Question</span><input type="text" class="form-control" name="' + question_counter + '[question]" ></div><div class="row"><div class="col-md-11"><button class="btn btn-success pull-right add-choices">Add Choices</button></div><div class="col-md-1"></div></div></div><br>')
+	};
+
+	function getAnswerWithOrderedName(number) {
+		answer_counter += 1
+		return ('<div class="input-group" name="' + number + '[' + answer_counter + ']"><span class="input-group-addon">Choices</span><input type="text" name="' + number + '[' + answer_counter + ']" class="form-control"></div>')
+	};
+
+
+
+	$('#add-question').on('click', function(event){
+		event.preventDefault();
+		var hi = $('#questions').prepend(getDivWithOrderedName())
+	});
+
+	$('.container').on('click', '.add-choices', function(event){
+		event.preventDefault();
+		current_question = ($(this).parents('.question'))[0];
+		current_question_number = current_question.getAttribute('name')
+		console.log((current_question))
+		$($(current_question).find('div:nth-child(1)')[0]).after(getAnswerWithOrderedName(current_question_number))
+	});
+
+
+});
+
+</script>

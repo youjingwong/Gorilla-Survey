@@ -1,0 +1,20 @@
+<%= erb :'partials/_navbar' %>
+
+<div class="container">
+	<form action="/signup" method="post">
+		<div class="input-group">
+		  <span class="input-group-addon">Username</span>
+		  <input type="text" name="username" class="form-control" placeholder="John Doe">
+		</div>
+
+		<div class="input-group">
+			<span class="input-group-addon">Password</span>
+		  <input type="text" name="password" class="form-control" placeholder="A1b2">
+		  
+		</div>
+
+    <div class="input-group pull-right">
+    	<button type="submit" class="btn btn-success">Sign Up</button>
+    </div>
+	</form>
+</div>

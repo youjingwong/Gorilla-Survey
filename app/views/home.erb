@@ -1,0 +1,13 @@
+<%= erb :'partials/_navbar' %>
+
+<div class="container">
+	<%= erb :'partials/_create_survey_button' %>
+
+	<h1> Latest Surveys </h1>
+	<% @surveys.each do |survey| %>
+		<a href="/surveys/<%= survey.id %>">
+			<p><%= survey.title %></p>
+		</a>
+	<% end %>
+
+</div>

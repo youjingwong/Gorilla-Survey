@@ -1,0 +1,30 @@
+<%= erb :'partials/_navbar' %>
+
+<div class="container">
+	<div class="row title">
+		<div class="col-lg-12" style="text-align:center">
+			<img src="<%= @survey.image_path %>" style="margin:auto"></img>
+		</div>
+		<h1> <%= @survey.title %> <h2>
+	</div>
+		<form action="/surveys/<%= @survey.id %>/submit" method="post">
+		<% @survey.questions.each_with_index do |question, index| %>
+			<h2><%= index + 1 %>. <%= question.body %></h2>
+				<br>
+				<% question.choices.each do |choice| %>
+				  <div class="row">
+				    <div class="input-group">
+				      <span class="input-group-addon">
+				        <input type="radio" name="choice[<%= choice.id %>]" value="<%= choice.body %>">
+				      </span>
+				      <p class="form-control"> <%= choice.body %> </p>
+				    </div>
+				  </div>
+				<% end %>
+				<br>
+		<% end %>
+		<% if login? %>
+			<input type="submit" value="Submit" class="btn btn-primary pull-right">
+		<% end %>
+	</form>
+</div>

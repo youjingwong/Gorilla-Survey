@@ -1,0 +1,13 @@
+<%= erb :'partials/_navbar' %>
+
+<div class="container">
+	<h1> <%= @user.username %> </h1>
+
+	<% @user.surveys.each do |survey| %>
+		<p>
+			<a href="/surveys/<%= survey.id %>">
+				<%= survey.title %>
+			</a>
+		</p>
+	<% end %>
+</div>
